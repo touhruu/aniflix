@@ -90,7 +90,7 @@ const store = useStore();
 
 store.dispatch('onGetFullFilmInfo', route.params.id);
 
-const filmInfo = computed(() => store.state.fullFilmInfo);
+const filmInfo = computed(() => store.state.fullFilmInfo); //computed следит за изменениями и меняет верстку
 </script>
 
 <style lang="scss" scoped>

@@ -4,7 +4,7 @@
       <AnimeCard v-for="film of films" :key="film.id" :filmInfo="film"/>
     </div>
     <div class="content-search-anime">
-      <p></p>
+      <CustomSelect :items="genres" title="Выберите жанр"/> <!-- если текст, то : ставить не надо -->
     </div>
   </div>
 </template>
@@ -13,12 +13,15 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import AnimeCard from '../components/AnimeCard';
+import CustomSelect from '../components/CustomSelect';
 
 const store = useStore();
 
 store.dispatch('onGetFilmsRequest');
+store.dispatch('onGetGenres');
 
-const films = computed(() => store.state.films)
+const films = computed(() => store.state.films);
+const genres = computed(() => store.state.genres);
 </script>
 
 <style lang="scss" scoped>

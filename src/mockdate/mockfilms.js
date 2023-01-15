@@ -87,3 +87,17 @@ export const fullFilms = [
         duration: 23
     },
 ];
+
+export const genres = [
+    { id: 1, name: 'Детектив' },
+    { id: 2, name: 'Триллер' },
+    { id: 3, name: 'Психология' },
+    { id: 4, name: 'Фентези' },
+    { id: 5, name: 'Мистика' },
+    { id: 6, name: 'Магия' },
+    { id: 7, name: 'Исторический' },
+    { id: 8, name: 'Комедия' },
+    { id: 9, name: 'Драма' },
+    { id: 10, name: 'Гарем' },
+    { id: 11, name: 'Хентай' }
+];
