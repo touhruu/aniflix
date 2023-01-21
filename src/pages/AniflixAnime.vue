@@ -4,7 +4,24 @@
       <AnimeCard v-for="film of films" :key="film.id" :filmInfo="film"/>
     </div>
     <div class="content-search-anime">
-      <CustomSelect :items="genres" title="Выберите жанр"/> <!-- если текст, то : ставить не надо -->
+      <CustomSelect
+          :items="genres"
+          title="Выберите жанр"
+          @changeItem="change"
+      />
+
+      <CustomSelect
+          :items="category"
+          title="Выберите категорию"
+          @changeItem="change"
+      />
+
+      <CustomSelect
+          :items="status"
+          title="Выберите статус"
+          @changeItem="change"
+      />
+      <!-- если текст, то : ставить не надо -->
     </div>
   </div>
 </template>
@@ -19,9 +36,17 @@ const store = useStore();
 
 store.dispatch('onGetFilmsRequest');
 store.dispatch('onGetGenres');
+store.dispatch('onGetStatus');
+store.dispatch('onGetCategory');
 
 const films = computed(() => store.state.films);
 const genres = computed(() => store.state.genres);
+const status = computed(() => store.state.status);
+const category = computed(() => store.state.category);
+
+function change(selectedArray){
+  console.log(selectedArray)
+}
 </script>
 
 <style lang="scss" scoped>

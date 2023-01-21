@@ -3,21 +3,23 @@
     <p v-if="!newTitle">{{ title }}</p>
     <p v-if="newTitle">{{ newTitle }}</p>
   </button>
-  <div class="list" v-class="{off: !isOpen}" ref="list">
-    <label v-for="item of items" :key="item.id" @click="selectItem(item)">
-      <input type="checkbox" value="text" />
+  <div :class="{ off: !isOpen }" class="list" ref="list">
+    <label v-for="item of items" :key="item.id">
+      <input type="checkbox" :value="item.name" v-model="isChecked"/>
       <p>{{ item.name }}</p>
     </label>
   </div>
 </template>
 
 <script setup>
-import { defineProps, toRefs, ref, onMounted } from "vue";
+import {defineProps, toRefs, ref, onMounted, watch, defineEmits} from "vue";
 
 const props = defineProps({
   items: Array,
-  title: String,
+  title: String
 });
+
+const emit = defineEmits(['changeItem'])
 
 const { items, title } = toRefs(props);
 
@@ -25,16 +27,14 @@ const isOpen = ref(false); // переменные ref() меняют верст
 const newTitle = ref("");
 const expandButton = ref();
 const list = ref();
+const isChecked = ref([]);
 
 onMounted(() => {
-  // console.log(expandButton.value);
-
   expandButton.value.addEventListener("click", function (event) {
     event.stopPropagation();
-    isOpen.value = true;
+    isOpen.value = !isOpen.value;
   });
 
-  console.log(list)
   list.value.addEventListener("click", function (event) {
     event.stopPropagation();
   });
@@ -43,14 +43,13 @@ onMounted(() => {
     isOpen.value = false;
   });
 });
-// function expandButton() {
-//   isOpen.value = !isOpen.value; // к переменным которые через ref() обращаться с помощью value
-// }
 
-function selectItem(item) {
-  console.log(item);
-  newTitle.value = item.name;
-}
+watch(isChecked, (currentValue) => {
+  // console.log("Текущее значение", currentValue);
+  newTitle.value = currentValue.join(", ");
+  emit('changeItem', currentValue);
+});
+
 </script>
 
 <style lang="scss" scoped>
@@ -60,6 +59,12 @@ function selectItem(item) {
   padding: 10px 10px 10px 10px;
   display: flex;
   justify-content: start;
+
+  p{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 
 .list {
@@ -82,7 +87,7 @@ label {
   }
 }
 
-.off{
+.off {
   display: none;
 }
 </style>

@@ -101,3 +101,16 @@ export const genres = [
     { id: 10, name: 'Гарем' },
     { id: 11, name: 'Хентай' }
 ];
+
+export const status = [
+    {id: 1, name: 'Вышел'},
+    {id: 2, name: 'Анонс'},
+    {id: 3, name: 'Онгоинг'}
+];
+
+export const category = [
+    {id: 1, name: 'Сериал'},
+    {id: 2, name: 'Фильм'},
+    {id: 3, name: 'OVA'},
+    {id: 3, name: 'ONA'}
+];
