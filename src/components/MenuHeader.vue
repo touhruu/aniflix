@@ -2,7 +2,7 @@
   <div class="header">
     <router-link to="/">
       <div class="header-item">
-        <p>ЛОГО</p>
+        <img src="assets/icon/logo4.png">
       </div>
     </router-link>
     <router-link to="/">
@@ -15,27 +15,49 @@
         <p>АНИМЕ</p>
       </div>
     </router-link>
-    <router-link to="/">
+    <a href="/anime-rand">
       <div class="header-item">
         <p>СЛУЧАЙНОЕ АНИМЕ</p>
       </div>
+    </a>
+    <router-link to="/video/add" v-if="user">
+      <div class="header-item">
+        <p>ДОБАВЛЕНИЕ АНИМЕ</p>
+      </div>
+    </router-link>
+    <router-link to="/joint-viewing" v-if="user">
+      <div class="header-item">
+        <p>СОВМЕСТНЫЙ ПРОСМОТР</p>
+      </div>
     </router-link>
     <div class="header-items-form">
-      <div class="form-wrapper">
-        <input class="input-search" type="text" placeholder="Поиск" />
-        <button class="button-search" type="submit">
-          <img src="assets/icon/search.png" />
-        </button>
-      </div>
+      <SearchForHeader
 
-      <button class="button-auth" type="submit">
-        <p>ВОЙТИ</p>
-      </button>
+      />
+      <router-link to="/anime/auth" v-if="!user">
+        <button class="button-auth" type="submit">
+          <p>ВОЙТИ</p>
+        </button>
+      </router-link>
+      <router-link to="/user" v-if="user">
+        <div class="header-user-lk">
+          <img src="/assets/icon/avatar6.png">
+        </div>
+      </router-link>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+  import { computed } from "vue";
+  import { useStore } from "vuex";
+  import SearchForHeader from "./SearchForHeader.vue"
+
+  const store = useStore();
+
+  const user = computed(() => store.state.user);
+
+</script>
 
 <style lang="scss" scoped>
 .header {
@@ -63,6 +85,11 @@
   & > :hover {
     color: white;
   }
+
+  img{
+    width: 130px;
+    margin-top: -15px;
+  }
 }
 
 .header-item p {
@@ -76,39 +103,15 @@
   display: flex;
   justify-content: end;
   padding-top: 20px;
-}
 
-.form-wrapper {
-  display: flex;
-  flex-direction: row;
-}
-
-.input-search {
-  background-color: #2b2b2b;
-  max-width: 100px;
-  height: 35px;
-  padding: 6px 12px 6px 12px;
-  border-radius: 8px 0px 0px 8px;
-  outline: none;
-  color: #bbbbbb;
-}
-
-.input-search::-webkit-input-placeholder {
-  color: #bbbbbb;
-}
-
-.button-search {
-  height: 35px;
-  background-color: #2b2b2b;
-  border-radius: 0px 8px 8px 0px;
-  padding: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 6px 12px 6px 12px;
-
-  img {
-    width: 18px;
+  .header-user-lk{
+    height: 100%;
+    margin-top: -14px;
+    img{
+      //background-color: white;
+      border-radius: 50%;
+      width: 60px;
+    }
   }
 }
 

@@ -4,38 +4,23 @@
       <MainCarousel />
     </div>
     <div class="filtr">
-      <div class="filtr-select">
-        <v-select
-          clearable
-          chips
-          label="Жанры"
-          :items="['Детектив', 'Гарем', 'Хентай', 'Яой', 'Сенен Ай', 'Комедия']"
-          multiple
-          variant="solo"
-        ></v-select>
-      </div>
-      <div class="filtr-select">
-        <v-select
-          clearable
-          chips
-          label="Статус"
-          :items="['Вышел', 'Анонс', 'Онгоинг']"
-          multiple
-          variant="solo"
-        ></v-select>
-      </div>
+      <p>Новинки</p>
     </div>
+    <CardSlider />
   </div>
 </template>
 
 <script setup>
 import MainCarousel from "../components/MainCarousel.vue";
+import CardSlider from "../components/CardSlider.vue";
+
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .content {
   width: 100%;
   height: 100%;
+  color: #b2b2b2;
 }
 
 .carusel {
@@ -49,12 +34,14 @@ import MainCarousel from "../components/MainCarousel.vue";
   background-color: #2b2b2b;
   display: flex;
   padding: 15px 5% 15px 5%;
-}
+  align-items: center;
 
-.filtr-select {
-  min-width: 200px;
-  background-color: #191919;
-  margin-right: 20px;
+  p{
+    color: #b2b2b2;
+    font-size: 26px;
+    font-weight: bold;
+    padding-left: 8px;
+  }
 }
 
 select {

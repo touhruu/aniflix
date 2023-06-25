@@ -4,7 +4,14 @@
 </template>
 
 <script setup>
+import { useStore } from "vuex";
 import MenuHeader from "./components/MenuHeader.vue";
+
+const store = useStore();
+
+store.dispatch("whoAmI")
+store.dispatch("onGetBookmark")
+store.dispatch("onGetFilmsRequest")
 </script>
 
 <style>
@@ -32,6 +39,7 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #2b2b2b, #bbbbbb);
+  background: #2b2b2b;
+  border-radius: 20px; 
 }
 </style>

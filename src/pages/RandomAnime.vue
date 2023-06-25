@@ -1,10 +1,10 @@
 <template>
-  <div class="content-wrapper">
+    <div class="content-wrapper" v-if="randAnime">
     <div class="content">
       <div class="blok-elem-anime">
         <div class="wrapper-picture">
           <div class="picture">
-            <img :src="'../'+filmInfo.picture" />
+            <img :src="'../'+randAnime.picture" />
           </div>
           <button class="button-video"><p>Просмотр</p></button>
           <CustomSelect 
@@ -17,27 +17,9 @@
             :widthButton="250"
             :listWidth="250"
           />
-          <!-- <select>
-            <option value="0">Добавить в закладки</option>
-            <option value="1">Смотрю</option>
-            <option value="2">В планах</option>
-            <option value="3">Брошено</option>
-            <option value="4">Просмотрено</option>
-            <option value="5">Любимое</option>
-          </select> -->
         </div>
         <div class="infa-anime">
-          <div class="title">{{ filmInfo.name }}</div>
-          <div class="item-opisanie">
-            <!-- <v-rating
-              v-model="rating"
-              color="white"
-              active-color="yellow-accent-4"
-              hover
-              size="18"
-              length=10
-            ></v-rating> -->
-          </div>
+          <div class="title">{{ randAnime.name }}</div>
           <div class="item-opisanie">
             <div class="name">Эпизоды:</div>
             <div class="date">
@@ -47,31 +29,31 @@
           <div class="item-opisanie">
             <div class="name">Дата выхода:</div>
             <div class="date">
-              <p>{{ filmInfo.release_ani }}г</p>
+              <p>{{ randAnime.release_ani }}г</p>
             </div>
           </div>
           <div class="item-opisanie">
             <div class="name">Статус:</div>
             <div class="date">
-              <p>{{ filmStatus }}</p>
+              <p>{{ randAnime.Status.name }}</p>
             </div>
           </div>
           <div class="item-opisanie">
             <div class="name">Возраст:</div>
             <div class="date">
-              <p>{{ filmInfo.age_limit }}</p>
+              <p>{{ randAnime.age_limit }}</p>
             </div>
           </div>
           <div class="item-opisanie">
             <div class="name">Тип:</div>
             <div class="date">
-              <p>{{ filmCategory }}</p>
+              <p>{{ randAnime.Category.name }}</p>
             </div>
           </div>
           <div class="item-opisanie">
             <div class="name">Жанр:</div>
             <div class="date">
-              <p v-for="genre of filmInfo.Genres" :key="genre.id">
+              <p v-for="genre of randAnime.Genres" :key="genre.id">
                 {{ genre.name }}
               </p>
             </div>
@@ -79,48 +61,48 @@
           <div class="item-opisanie">
             <div class="name">Режессер:</div>
             <div class="date">
-              <p>{{ filmInfo.producer }}</p>
+              <p>{{ randAnime.producer }}</p>
             </div>
           </div>
           <div class="item-opisanie">
             <div class="name">Студия:</div>
             <div class="date">
-              <p>{{ filmInfo.studio }}</p>
+              <p>{{ randAnime.studio }}</p>
             </div>
           </div>
           <div class="item-opisanie">
             <div class="name">Длительность:</div>
             <div class="date">
-              <p>{{ filmInfo.duration }} мин</p>
+              <p>{{ randAnime.duration }} мин</p>
             </div>
           </div>
         </div>
       </div>
       <div class="opisanie">
-        <p><b>Описание: </b>{{ filmInfo.description }}</p>
+        <p><b>Описание: </b>{{ randAnime.description }}</p>
       </div>
-        <!-- -->
-        <VideoPlayer :filmInfo="filmInfo"/>
-        <!-- -->
+        <VideoPlayer :filmInfo="randAnime"/>
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import { useStore } from 'vuex';
-import { useRoute } from "vue-router";
+
+import { computed, watch } from 'vue'
+import { useStore } from 'vuex'
 import VideoPlayer from "../components/VideoPlayer"
 import CustomSelect from "../components/CustomSelect"
 
-const route = useRoute();
-const store = useStore();
+const store = useStore()
 
-store.dispatch('onGetFullFilmInfo', route.params.id);
+store.dispatch('onGetRandomFilm')
 
-const filmInfo = computed(() => store.state.fullFilmInfo); //computed следит за изменениями и меняет верстку
-const filmStatus = computed(() => filmInfo.value.Status && filmInfo.value.Status.name);
-const filmCategory = computed(() => filmInfo.value.Category && filmInfo.value.Category.name);
+const randAnime = computed(() => store.state.randFilm)
+console.log(randAnime.value)
+
+watch(randAnime, () => {
+    console.log(randAnime.value)
+})
 
 const bookmarks = [
   {
@@ -148,7 +130,7 @@ const bookmarks = [
 function changeBookmarks(bookmarks){
   const newBookmark = { 
     bookmarkType: bookmarks.id,
-    animeId: filmInfo.value.id
+    animeId: randAnime.value.id
     }
   store.dispatch('addBookmark', newBookmark)
 }

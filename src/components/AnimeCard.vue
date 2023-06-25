@@ -1,11 +1,19 @@
 <template>
 <router-link :to="'/anime/' + filmInfo.id">
-  <div class="anime-item">
-    <div class="mark">
-      <img src="assets/icon/zakladki1.png" />
+  <div class="anime-item" :style="{'background-color': backgroundColor}">
+    <div class="mark" v-if="filmInfo.bookmark">
+      <img src="assets/icon/zakladka2.png" />
     </div>
-    <div class="category-anime">
-      <p>Сериал</p>
+    <template v-if="!bookmarkExit">
+      <div class="mark" v-if="!filmInfo.bookmark">
+        <img src="assets/icon/zakladki1.png" />
+      </div>
+    </template>
+    <div class="exit" v-if="bookmarkExit" @click="deleteBookmark(bookmarkId, $event)">
+      <img src="assets/icon/exit.png">
+    </div>
+    <div class="category-anime" :style="`background: ${filmInfo.Category.color}`">
+      <p>{{ filmInfo.Category.name }}</p>
     </div>
     <div class="poster">
       <img :src="filmInfo.picture" />
@@ -14,13 +22,13 @@
       <div class="title">
         <p>{{ filmInfo.name }}</p>
       </div>
-      <p><b>Эпизоды: </b>{{ filmInfo.episodes }} серий</p>
-      <p><b>Год: </b>{{ filmInfo.year }}</p>
+      <p><b>Эпизоды: </b>23 серий</p>
+      <p><b>Год: </b>{{ filmInfo.release_ani }}</p>
       <p>
         <b>Жанр: </b>
-        <template v-for="(genre, index) of filmInfo.genre" :key="genre.id">
+        <template v-for="(genre, index) of filmInfo.Genres" :key="genre.id">
           <span>{{ genre.name }}</span>
-          <span v-if="index < filmInfo.genre.length-1">, </span>
+          <span v-if="index < filmInfo.Genres.length-1">, </span>
         </template>
       </p>
       <div class="anime-rating">
@@ -39,30 +47,45 @@
 </template>
 
 <script setup>
-import { defineProps, toRefs } from "vue";
+import { useStore } from "vuex"
+import { defineProps, toRefs } from "vue"
+
+const store = useStore()
 
 const props = defineProps({
   filmInfo: Object,
+  backgroundColor: { type: String, default: '#2b2b2b' },
+  bookmarkExit: { type: Boolean, default: false },
+  bookmarkId: null
 });
 
-const { filmInfo } = toRefs(props);
+const { filmInfo, backgroundColor, bookmarkExit, bookmarkId } = toRefs(props)
+
+function deleteBookmark(bookmarkId, event){
+  event.preventDefault()
+  store.dispatch('deleteBookmark', bookmarkId)
+}
 </script>
 
 <style lang="scss" scoped>
+a{
+  height: 245px;
+}
+
 .anime-item {
-  width: 450px;
+  //max-width: 435px;
   height: 245px;
   display: flex;
   background-color: #2b2b2b;
   border-radius: 4%;
-  margin: 0px 29px 29px 0px;
+  margin-bottom: 35px;
+  //margin: 0px 20px 20px 0px;
   position: relative;
 
   .poster {
     width: 170px;
     height: 100%;
     display: flex;
-    background: #bbb;
     border-radius: 4% 0% 0% 4%; //для картинки написать этот border
 
     img {
@@ -137,6 +160,15 @@ const { filmInfo } = toRefs(props);
       position: absolute;
       right: 25px;
       top: -2px;
+    }
+  }
+
+  .exit{
+    img{
+      width: 20px;
+      position: absolute;
+      right: 15px;
+      top: 15px;
     }
   }
 }
