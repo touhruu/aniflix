@@ -6,7 +6,7 @@
       <div class="video-pleer" v-if="room.Anime.seria && room.Anime.seria[numberSeria]">
         <video controls="controls" :key="numberSeria" ref="player">
           <source
-            :src="'http://localhost:3000/' + room.Anime.seria[numberSeria].Video.videoFile"
+            :src="'http://141.8.194.146:3000/' + room.Anime.seria[numberSeria].Video.videoFile"
           />
         </video>
         <v-pagination
@@ -40,7 +40,7 @@ function changeVideo(number) {
 
 store.dispatch("onGetOneRoom", router.params.url);
 const room = computed(() => store.state.room);
-const socket = useWebSocket("http://localhost:3000");
+const socket = useWebSocket("http://141.8.194.146:3000");
 socket.emit("addRoom", router.params.url);
 
 socket.emit("newMessage");

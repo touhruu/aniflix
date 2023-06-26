@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const BACKEND_API = 'http://localhost:3000/api'
+export const BACKEND_API = 'http://141.8.194.146:3000/api'
 const api = axios.create({
     withCredentials: true,
     baseURL: BACKEND_API

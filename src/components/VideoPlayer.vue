@@ -2,7 +2,7 @@
   <div class="video-pleer" v-if="filmInfo.seria && filmInfo.seria[numberSeria]">
     <video controls="controls" :key="numberSeria">
       <source
-        :src="'http://localhost:3000/' + filmInfo.seria[numberSeria].Video.videoFile"
+        :src="'http://141.8.194.146:3000/' + filmInfo.seria[numberSeria].Video.videoFile"
       />
     </video>
     <v-pagination

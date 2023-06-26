@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper-content">
     <div class="wallpaper-img">
-      <img :src="'http://localhost:3000/' + user.backgraund" v-if="user" />
+      <img :src="'http://141.8.194.146:3000/' + user.backgraund" v-if="user" />
       <div class="buttonFonUpdate">
         <DownloadButtonFon />
       </div>
@@ -10,7 +10,7 @@
       <div class="wrapper-profile">
         <div class="profile">
           <div class="foto">
-            <img :src="'http://localhost:3000/' + user.avatar" v-if="user" />
+            <img :src="'http://141.8.194.146:3000/' + user.avatar" v-if="user" />
             <div class="buttonUpdateAvatar">
               <DownloadButton />
             </div>
