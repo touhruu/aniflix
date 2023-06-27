@@ -16,7 +16,7 @@
       <p>{{ filmInfo.Category.name }}</p>
     </div>
     <div class="poster">
-      <img :src="filmInfo.picture" />
+      <img :src="'http://141.8.194.146:3000/' + filmInfo.picture" v-if="filmInfo"/>
     </div>
     <div class="opisanie">
       <div class="title">
@@ -90,6 +90,8 @@ a{
 
     img {
       border-radius: 4% 0% 0% 4%;
+      width: 170px;
+      object-fit: cover;
     }
   }
 
@@ -101,17 +103,24 @@ a{
 
     .title {
       width: 100%;
+      height: 60px;
       font-size: 20px;
       font-weight: bold;
       margin-bottom: 20px;
       cursor: pointer;
       padding-top: 4px;
       word-break: break-word;
+      overflow: hidden;
+      text-overflow: ellipsis;
 
       title p {
         width: 100%;
         height: 60px;
         text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
       }
     }
 

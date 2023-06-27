@@ -4,7 +4,7 @@
       <div class="blok-elem-anime">
         <div class="wrapper-picture">
           <div class="picture">
-            <img :src="'../'+randAnime.picture" />
+            <img :src="'http://141.8.194.146:3000/' + randAnime.picture" />
           </div>
           <button class="button-video"><p>Просмотр</p></button>
           <CustomSelect 
@@ -23,7 +23,7 @@
           <div class="item-opisanie">
             <div class="name">Эпизоды:</div>
             <div class="date">
-              <p>12 серий</p>
+              <p>{{ randAnime.seria.length }} серий</p>
             </div>
           </div>
           <div class="item-opisanie">
@@ -59,15 +59,9 @@
             </div>
           </div>
           <div class="item-opisanie">
-            <div class="name">Режессер:</div>
-            <div class="date">
-              <p>{{ randAnime.producer }}</p>
-            </div>
-          </div>
-          <div class="item-opisanie">
             <div class="name">Студия:</div>
             <div class="date">
-              <p>{{ randAnime.studio }}</p>
+              <p>MAPPA</p>
             </div>
           </div>
           <div class="item-opisanie">
@@ -168,11 +162,12 @@ function changeBookmarks(bookmarks){
           img {
             width: 100%;
             height: 100%;
+            object-fit: cover;
           }
         }
 
         .button-video {
-          height: 50px;
+          height: 40px;
           width: 100%;
           border-radius: 0px;
           background-color: #2b2b2b;

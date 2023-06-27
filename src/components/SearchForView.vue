@@ -78,7 +78,7 @@
 }
 
 .input-search {
-  background-color: #2b2b2b;
+  background-color: #191919;
   width: 240px;
   height: 35px;
   padding: 6px 12px 6px 12px;
@@ -93,7 +93,7 @@
 
 .button-search {
   height: 35px;
-  background-color: #2b2b2b;
+  background-color: #191919;
   border-radius: 0px 8px 8px 0px;
   padding: 5px;
   display: flex;

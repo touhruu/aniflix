@@ -2,7 +2,7 @@
 <!-- <router-link :to="'/anime/' + film.id"> -->
     <div class="card-anime">
         <div class="foto">
-            <img :src="film.picture">
+            <img :src="'http://141.8.194.146:3000/' + film.picture">
         </div>
         <div class="info-anime">
             <p class="title">{{film.name}}</p>
@@ -40,6 +40,12 @@ a{
     background-color: red;
     display: flex;
     object-fit: cover;
+
+    img{
+        width: 70px;
+        height: 100px;
+        object-fit: cover;
+    }
 }
 
 .info-anime{
@@ -51,6 +57,10 @@ a{
     .title{
         font-weight: bold;
         margin-bottom: 10px;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
 }
 

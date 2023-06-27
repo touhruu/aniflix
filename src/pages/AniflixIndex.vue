@@ -7,12 +7,14 @@
       <p>Новинки</p>
     </div>
     <CardSlider />
+    <AnimeMainSliderCards/>
   </div>
 </template>
 
 <script setup>
 import MainCarousel from "../components/MainCarousel.vue";
 import CardSlider from "../components/CardSlider.vue";
+import AnimeMainSliderCards from "../components/AnimeMainSliderCards.vue";
 
 </script>
 

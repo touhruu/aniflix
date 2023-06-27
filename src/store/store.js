@@ -17,7 +17,9 @@ export const store = createStore({
       randFilm: null,
       bookmark: null,
       rooms: [],
-      room: null
+      room: null,
+      lastVideoId: null,
+      messages: null
     }
   },
   mutations: {
@@ -87,6 +89,15 @@ export const store = createStore({
     updatePass(state, userInfo){
       state.user.password = userInfo
     },
+    getLastVideoId(state, videoId){
+      state.lastVideoId = videoId
+    },
+    getMessagesForRoom(state, messages){
+      state.messages = messages
+    },
+    addMessageForChat(state, message){
+      state.messages.push(message)
+    }
   },
   actions: {
     async onGetFilmsRequest({ commit }) {
@@ -150,6 +161,11 @@ export const store = createStore({
     async onGetRandomFilm({ commit }){
       const randomFilmFromBackend = await api.get('/rand-anime')
       commit('setRandFilm', randomFilmFromBackend.data)
+    },
+
+    async getLastVideoId({ commit }){
+      const videoId = await api.get('/video-last')
+      commit('getLastVideoId', videoId.data)
     },
 
     async sendVideo(state, videoFile){
@@ -220,6 +236,15 @@ export const store = createStore({
     async updateUserPass({ commit }, user){
       const userInfo = await api.put('/updateUserPass', user)
       commit('updatePass', userInfo.data)
+    },
+
+    async addSeria(_, seria){
+      await api.post('/seria', seria)
+    },
+
+    async getMessagesForRoom({ commit }, roomId){
+      const messages = await api.get(`/getMessage/${roomId}`)
+      commit('getMessagesForRoom', messages.data)
     }
   },
   getters: {

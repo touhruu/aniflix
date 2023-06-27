@@ -2,7 +2,7 @@
     <div class="content">
         <div class="button-wrapper">
             <p class="title">Сейчас смотрят</p>
-            <div class="count-room">Всего комнат: 52</div>
+            <div class="count-room" v-if="rooms">Всего комнат: {{ rooms.length }}</div>
             <button class="add-room" @click="showModal()">Создать комнату</button>
             <v-dialog
                 v-model="dialog"

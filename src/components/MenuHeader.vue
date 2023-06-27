@@ -20,11 +20,6 @@
         <p>СЛУЧАЙНОЕ АНИМЕ</p>
       </div>
     </a>
-    <router-link to="/video/add" v-if="user">
-      <div class="header-item">
-        <p>ДОБАВЛЕНИЕ АНИМЕ</p>
-      </div>
-    </router-link>
     <router-link to="/joint-viewing" v-if="user">
       <div class="header-item">
         <p>СОВМЕСТНЫЙ ПРОСМОТР</p>

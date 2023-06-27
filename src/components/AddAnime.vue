@@ -113,6 +113,7 @@ function addAnime(){
         &__title{
             margin-bottom: 5px;
             font-weight: bold;
+            padding-top: 10px;
         }
 
         &__name{

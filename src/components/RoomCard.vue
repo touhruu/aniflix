@@ -7,7 +7,7 @@
         <div class="shadow-card">
            <p>{{ room.Anime && room.Anime.name }}</p> <!-- room.Anime если его нет, то код после && не сработает -->
         </div>
-        <img class="cover" :src="room.Anime.picture" />
+        <img class="cover" :src="'http://141.8.194.146:3000/' + room.Anime.picture" />
       </div>
     </div>
     <div class="participant">
@@ -51,6 +51,12 @@ const { room } = toRefs(props)
     transition-duration: 1s;
     position: releative;
     z-index: 1;
+  }
+
+  img{
+    width: 210px;
+    height: 310px;
+    object-fit: cover;
   }
 }
 

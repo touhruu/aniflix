@@ -4,9 +4,9 @@
       <div class="blok-elem-anime">
         <div class="wrapper-picture">
           <div class="picture">
-            <img :src="'../'+filmInfo.picture" />
+            <img :src="'http://141.8.194.146:3000/' + filmInfo.picture" />
           </div>
-          <button class="button-video"><p>Просмотр</p></button>
+          <a href="#video"></a><button class="button-video"><p>Просмотр</p></button>
           <CustomSelect 
             :items="bookmarks" 
             title="Добавить в закладки" 
@@ -41,7 +41,7 @@
           <div class="item-opisanie">
             <div class="name">Эпизоды:</div>
             <div class="date">
-              <p>12 серий</p>
+              <p>{{ filmInfo.seria.length }} серий</p>
             </div>
           </div>
           <div class="item-opisanie">
@@ -77,15 +77,9 @@
             </div>
           </div>
           <div class="item-opisanie">
-            <div class="name">Режессер:</div>
-            <div class="date">
-              <p>{{ filmInfo.producer }}</p>
-            </div>
-          </div>
-          <div class="item-opisanie">
             <div class="name">Студия:</div>
             <div class="date">
-              <p>{{ filmInfo.studio }}</p>
+              <p>MAPPA</p>
             </div>
           </div>
           <div class="item-opisanie">
@@ -100,7 +94,7 @@
         <p><b>Описание: </b>{{ filmInfo.description }}</p>
       </div>
         <!-- -->
-        <VideoPlayer :filmInfo="filmInfo"/>
+        <VideoPlayer :filmInfo="filmInfo" id="video"/>
         <!-- -->
     </div>
   </div>
@@ -186,11 +180,12 @@ function changeBookmarks(bookmarks){
           img {
             width: 100%;
             height: 100%;
+            object-fit: cover;
           }
         }
 
         .button-video {
-          height: 50px;
+          height: 40px;
           width: 100%;
           border-radius: 0px;
           background-color: #2b2b2b;

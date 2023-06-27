@@ -20,7 +20,7 @@
           <button data-id="2" @click="switchTabMenu($event)">
             Редактировать профиль
           </button>
-          <button data-id="3" @click="switchTabMenu($event)">Добавить аниме</button>
+          <button data-id="3" @click="switchTabMenu($event)" v-if="user.RoleId == 2">Добавить аниме</button>
           <button @click="exit()">Выйти</button>
         </div>
       </div>
@@ -264,7 +264,30 @@
           </div>
         </div>
         <div class="info" :class="{ show: 3 == selectedMenuId }">
-          <AddAnime/>
+          <div class="tab-field">
+            <div
+              class="tab"
+              data-id="1"
+              :class="{ activ: 1 == selectedTabId }"
+              @click="switchTab($event)"
+            >
+              Создать карточку с аниме
+            </div>
+            <div
+              class="tab"
+              data-id="2"
+              :class="{ activ: 2 == selectedTabId }"
+              @click="switchTab($event)"
+            >
+              Добавление серий к аниме
+            </div>
+          </div>
+          <div class="content-tab" :class="{ show: WATCH_NOW == selectedTabId }">
+              <AddAnime/>
+          </div>
+          <div class="content-tab" :class="{ show: GONA_VIEW == selectedTabId }">
+              <AddSeria/>
+          </div>
         </div>
       </div>
     </div>
@@ -279,6 +302,7 @@ import AnimeCard from "../components/AnimeCard";
 import DownloadButton from "../components/DownloadButton";
 import DownloadButtonFon from "../components/DownloadButtonFon";
 import AddAnime from "../components/AddAnime";
+import AddSeria from "../components/AddSeria";
 
 const router = useRouter();
 const store = useStore();
